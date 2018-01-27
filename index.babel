@@ -1,0 +1,34 @@
+class Input extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={userInput:'# Sample Heading\n### Another heading\n\nParagraphs are separated by a blank line.\n\nLeave 2 spaces at the end of a line to do a  line break\n\nText attributes *italic*, **bold**,\n`monospace`, ~~strikethrough~~ .\n\nUnordered list:\n  * apples\n  * oranges\n  * pears\n\n'};
+    this.handleUserInput=this.handleUserInput.bind(this);
+  }
+  
+  handleUserInput(e){
+    this.setState({
+      userInput:e.target.value
+    });
+    
+  }
+  
+  render(){
+    return (
+    <div>
+        <div className="row">
+          <div className="col-md-6">
+       <textarea id="mark" type="text" value={this.state.userInput} onChange={this.handleUserInput} className='col-xs-10 col-xs-offset-1 full-height'></textarea>
+            </div>
+          <div className="col-md-6">
+        <div id="preview" className="col-xs-10 col-xs-offset-1 full-height" dangerouslySetInnerHTML={{__html:marked(this.state.userInput)}}></div>
+           </div>
+          </div>
+    </div>
+    ) 
+  }
+}
+
+ReactDOM.render(
+        <Input/>,
+  document.getElementById('app')
+        );
